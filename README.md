@@ -77,5 +77,3 @@ declare module "cytoscape" { // extends Cytoscape Core
   }
 }
 ```
-# cytoscape-blink
-# cytoscape-blink
