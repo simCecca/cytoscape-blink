@@ -48,9 +48,9 @@ npm publish
 
 ```
 import cytoscape from "cytoscape";
-import yourCoreFunction from "cytoscape-extensions-boilerplate";
+import blink from "cytoscape-blink;
 
-cytoscape.use(yourCoreFunction);
+cytoscape.use(blink);
 
 
 
@@ -58,7 +58,7 @@ const cy = cytoscape({
     ....
 });
 
-cy.yourCoreFunction();
+cy.blink({nodes: [id1, id2, id3, id4], color: 'blue'});
 
 ```
 
@@ -69,11 +69,12 @@ in this project there is a file called types.d.ts, so just bring this file into 
 ```
 import "cytoscape";
 import cytoscape from "cytoscape";
-import { YourCoreProps } from "./src/interfaces";
+import { BlinkProps } from "cytoscape-blink";
 
-declare module "cytoscape" { // extends Cytoscape Core
+declare module "cytoscape" {
   interface Core {
-    yourCoreFunction: (props: YourCoreProps) => cytoscape.Core;
+    blink: (props: BlinkProps) => cytoscape.Core;
   }
 }
+
 ```

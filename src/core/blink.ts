@@ -1,34 +1,37 @@
 import { Core, ElementDefinition, NodeSingular } from "cytoscape";
 import { BlinkProps } from "../interfaces";
 
-function blink(props: BlinkProps): Core {
+function blink({ nodes, color, radius, duration }: BlinkProps): Core {
   const cy: Core = this;
   // do your functionality here
   const cyNodes: Array<ElementDefinition> = [];
-  for (const nodeId of props.nodes) {
+  const cyNodesInGraph: Array<NodeSingular> = [];
+  for (const nodeId of nodes) {
     const cyNode: NodeSingular = cy.$("#" + nodeId);
     if (cyNode) {
+      cyNodesInGraph.push(cyNode);
       const cyPositions = cyNode.position();
       const fakeNode = cy.$("#fakeNode" + nodeId);
       if ((!fakeNode || fakeNode.length == 0) && cyPositions) {
         cyNodes.push({
           data: { id: "fakeNode" + nodeId },
-          position: { x: cyPositions.x, y: cyPositions.y },
-          css: { "z-compound-depth": "bottom" },
+          position: cyPositions,
         });
       }
     }
   }
-  const color = props.color || "red";
+  const cColor = color || "red";
   const animate = {
     style: {
-      "background-color": color,
-      width: 100,
-      height: 100,
+      "background-color": cColor,
+      width: radius || 100,
+      height: radius || 100,
     },
-    duration: 1000,
+    duration: duration | 1000,
   };
+
   cy.add(cyNodes)
+    .style({ "z-compound-depth": "bottom", label: ".", "font-size": 0 })
     .animate(animate)
     .animate(animate)
     .animate(animate, {
@@ -37,6 +40,9 @@ function blink(props: BlinkProps): Core {
         cyNodes.forEach((node) => {
           const cyN = cy.$("#" + node.data.id);
           cy.remove(cyN);
+        });
+        cyNodesInGraph.forEach((node) => {
+          node.select();
         });
         cy.endBatch();
       },
