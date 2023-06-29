@@ -1,21 +1,43 @@
 This is a Simple project created and maintained with the just for fun philosophy
 
-This is a boilerplate to be able to develop an extension of type Core in cytoscape
+We want to give cytoscape the possibility of blinking nodes and edges so as to highlight and distinguish them as a whole.
+Given an array of ids, it blinds those nodes and edges on screen and finally highlights them
 
 # usage
 
-- Clone/fork/download the repository
+This is a core feature and can therefore be used directly from the cytoscape object
+the method to call is called blink and takes the following parameters
 
-- Install the dependences
+elements: Array<string>;
+color?: string; // default red
+radiusNodes?: {
+radius: number; // default 100
+isAPercentage: boolean; // is a percentage or an absolute
+};
+radiusEdges?: {
+radius: number; // default 10
+isAPercentage: boolean; // is a percentage or an absolute
+};
+duration?: number; // default 1 second
+times?: number; // default 3 not implemented for now
+selectAtTheEnd?: boolean; // default true
+
+Utilizzo in un applicazione finale
 
 ```
-npm install
-```
+import cytoscape from "cytoscape";
+import blink from "cytoscape-blink;
 
-- Run the project
+cytoscape.use(blink);
 
-```
-npm run dev
+
+
+const cy = cytoscape({
+    ....
+});
+
+cy.blink({elements: [id1, id2, id3, id4], color: 'blue'});
+
 ```
 
 # develop mode
@@ -45,22 +67,6 @@ npm publish
 ```
 
 # end application
-
-```
-import cytoscape from "cytoscape";
-import blink from "cytoscape-blink;
-
-cytoscape.use(blink);
-
-
-
-const cy = cytoscape({
-    ....
-});
-
-cy.blink({nodes: [id1, id2, id3, id4], color: 'blue'});
-
-```
 
 If the final application uses types, then extend the Core class so as to add your functionality to the callable ones (only for typesctipt)
 
