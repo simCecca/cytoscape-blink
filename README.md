@@ -5,8 +5,8 @@ Given an array of ids, it blinds those nodes and edges on screen and finally hig
 
 # usage
 
-This is a core feature and can therefore be used directly from the cytoscape object
-the method to call is called blink and takes the following parameters
+This is a core feature and can therefore be used directly from the cytoscape object;
+The method to call is called blink and takes the following parameters
 
 ```
 elements: Array<string>; // id of the nodes and edges to blink
@@ -20,7 +20,7 @@ widthEdges?: { // width to add to the edges during the blink
   isAPercentage: boolean; // // specifies whether the width to add is in percentage or in absolute value => default false
 };
 duration?: number; // duration for each blink => default 1000 milliseconds
-times?: number; // not implemented for now number of blinks for every node/edge => default 3 not implemented for now
+times?: number; // number of blinks for every node/edge => default 3
 selectAtTheEnd?: boolean; // if at the end of the blinking the nodes and edges are to be selected => default false
 
 ```
@@ -58,30 +58,4 @@ declare module "cytoscape" {
   }
 }
 
-```
-
-# develop mode
-
-You can use the npm link logic for the develop mode, I think it's the easiest way, but there are many other ways.
-
-- Inside this project, create the link
-
-```
-sudo npm link
-```
-
-- inside the project that use cytoscape with us extension
-
-```
-sudo npm link extensionPath
-```
-
-# deploy on npm
-
-```
-npm login
-```
-
-```
-npm publish
 ```

@@ -26,7 +26,7 @@ function blink({
 
     const cy: Core = this;
     // do your functionality here
-    const cTimes = times | 3;
+    const cTimes = times || 3;
     const cyNodes: Array<ElementDefinition> = [];
     const id2cyNodeInGraph: Map<string, NodeSingular> = new Map();
     const cyEdgesInGraph: Array<EdgeSingular> = [];
@@ -84,22 +84,31 @@ function blink({
         },
         duration: duration | 1000,
       };
-      cy.add(cyNode)
-        .style({ "z-compound-depth": "bottom", label: ".", "font-size": 0 })
-        .animate(animateNodes)
-        .animate(animateNodes)
-        .animate(animateNodes, {
-          complete: () => {
-            const cyN = cy.$("#" + cyNode.data.id);
-            cy.remove(cyN);
+      const prNode = cy
+        .add(cyNode)
+        .style({ "z-compound-depth": "bottom", label: ".", "font-size": 0 });
+      for (let i = 0; i < cTimes; i++) {
+        if (i + 1 == cTimes) {
+          prNode.animate(animateNodes, {
+            complete: () => {
+              const cyN = cy.$("#" + cyNode.data.id);
+              cy.remove(cyN);
 
-            if (selectAtTheEnd != undefined && selectAtTheEnd && cNodeInGraph) {
-              cNodeInGraph.select();
-            }
-            nodesInExecution = false;
-            updateGeneralExecution(nodesInExecution, edgesInExecution);
-          },
-        });
+              if (
+                selectAtTheEnd != undefined &&
+                selectAtTheEnd &&
+                cNodeInGraph
+              ) {
+                cNodeInGraph.select();
+              }
+              nodesInExecution = false;
+              updateGeneralExecution(nodesInExecution, edgesInExecution);
+            },
+          });
+        } else {
+          prNode.animate(animateNodes);
+        }
+      }
     });
     cy.endBatch();
     cy.startBatch();
@@ -127,20 +136,23 @@ function blink({
         },
         duration: duration | 1000,
       };
-      edge
-        .animate(animateEdges)
-        .animate(animateEdges)
-        .animate(animateEdges, {
-          complete: () => {
-            edge.style("width", width);
-            edge.style("line-color", color);
-            if (selectAtTheEnd != undefined && selectAtTheEnd) {
-              edge.select();
-            }
-            edgesInExecution = false;
-            updateGeneralExecution(nodesInExecution, edgesInExecution);
-          },
-        });
+      for (let i = 0; i < cTimes; i++) {
+        if (i + 1 == cTimes) {
+          edge.animate(animateEdges, {
+            complete: () => {
+              edge.style("width", width);
+              edge.style("line-color", color);
+              if (selectAtTheEnd != undefined && selectAtTheEnd) {
+                edge.select();
+              }
+              edgesInExecution = false;
+              updateGeneralExecution(nodesInExecution, edgesInExecution);
+            },
+          });
+        } else {
+          edge.animate(animateEdges);
+        }
+      }
     });
     cy.endBatch();
 

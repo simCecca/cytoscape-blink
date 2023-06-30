@@ -10,6 +10,6 @@ export interface BlinkProps {
     isAPercentage: boolean; // is a percentage or an absolute
   };
   duration?: number; // default 1 second
-  times?: number; // default 3 not implemented for now
+  times?: number; // default 3
   selectAtTheEnd?: boolean; // default true
 }
