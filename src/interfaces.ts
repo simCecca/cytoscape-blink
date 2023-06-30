@@ -5,8 +5,8 @@ export interface BlinkProps {
     radius: number; // default 100
     isAPercentage: boolean; // is a percentage or an absolute
   };
-  radiusEdges?: {
-    radius: number; // default 10
+  widthEdges?: {
+    width: number; // default 10
     isAPercentage: boolean; // is a percentage or an absolute
   };
   duration?: number; // default 1 second
