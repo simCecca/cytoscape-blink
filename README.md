@@ -3,7 +3,7 @@ This is a Simple project created and maintained with the just for fun philosophy
 We want to give cytoscape the possibility of blinking nodes and edges so as to highlight and distinguish them as a whole.
 Given an array of ids, it blinds those nodes and edges on screen and finally highlights them
 
-CodeSanbox: https://lkvc2t.csb.app/
+CodeSanbox: https://lkvc2t-3000.csb.app/
 
 # usage
 

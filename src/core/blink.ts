@@ -59,13 +59,13 @@ function blink({
       const style = cNodeInGraph.style();
       const width = style.width;
       const splitted = (width || "").split(/(\d+)/);
-      let radius = 100 + (splitted[1] || 1);
+      const cWidth = Number(splitted[1] || 1);
+      let radius = 100 + cWidth;
       if (
         radiusNodes &&
         splitted.length >= 3 &&
         radiusNodes.radius != undefined
       ) {
-        const cWidth = Number(splitted[1]);
         if (radiusNodes.isAPercentage) {
           radius = (1 + radiusNodes.radius / 100) * cWidth;
         } else if (!radiusNodes.isAPercentage) {
@@ -117,9 +117,9 @@ function blink({
       const width = style.width;
       const color = style["line-color"];
       const splitted = (width || "").split(/(\d+)/);
-      let radius = 20 + (splitted[1] || 1);
+      const cWidth = Number(splitted[1] || 1);
+      let radius = 20 + cWidth;
       if (widthEdges && splitted.length >= 3 && widthEdges.width != undefined) {
-        const cWidth = Number(splitted[1]);
         if (widthEdges.isAPercentage) {
           radius = (1 + widthEdges.width / 100) * cWidth;
         } else if (!widthEdges.isAPercentage) {
